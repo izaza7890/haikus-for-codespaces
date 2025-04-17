@@ -1,6 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Compartilhar Localização</title>
+</head>
+<body>
+  <h2>Clique no botão para compartilhar sua localização</h2>
+  <button onclick="getLocation()">Compartilhar</button>
 
-# Haikus for Codespaces
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(sendLocation, showError);
+      } else {
+        alert("Seu navegador não suporta geolocalização.");
+      }
+    }
 
-This is a quick node project template for demoing Codespaces. It is based on the [Azure node sample](https://github.com/Azure-Samples/nodejs-docs-hello-world). It's great!!!
+    function sendLocation(position) {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      const link = `https://wa.me/5591991239984?text=Minha%20localização:%20https://www.google.com/maps?q=${lat},${lon}`;
+      window.location.href = link;
+    }
 
-Point your browser to [Quickstart for GitHub Codespaces](https://docs.github.com/en/codespaces/getting-started/quickstart) for a tour of using Codespaces with this repo.
+    function showError(error) {
+      alert("Não foi possível obter a localização.");
+    }
+  </script>
+</body>
+</html>
